@@ -1,19 +1,28 @@
 # TO-DO: Implement a recursive implementation of binary search
 def binary_search(arr, target, start, end):
     # Your code here
-    middle = (start + end) // 2
-    if arr[middle] == target:
-        return middle
+    #find a midpoint start search there
+    #check if start < end first
+    if start > end:
+        return -1
+    mid = (start + end) // 2
+    if arr[mid] == target:
+        return mid
+    # check if mid is < target
+    #if yes call binary search on new area
     else:
-        if arr[middle] > target:
-            start = 0
-            end = middle
-            return binary_search(arr[start:end], target, start, end)
-        if arr[middle] < target:
-            start = middle + 1
+        if arr[mid] < target:
+            start = mid + 1 
             end = len(arr)
-            return binary_search(arr[start:end],target,start,end)
-                
+            return binary_search(arr[start:end], target, start, end)
+            # check if mid is > target
+        #if yes call binary search on new area
+        if arr[mid] > target:
+            start = 0
+            end = mid
+            return binary_search(arr[start:end], target, start, end)
+        
+             
 
 # STRETCH: implement an order-agnostic binary search
 # This version of binary search should correctly find 
